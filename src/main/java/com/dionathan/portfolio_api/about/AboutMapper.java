@@ -14,7 +14,9 @@ public class AboutMapper {
 
         about.setName(requestDTO.name());
         about.setTitle(requestDTO.title());
-        about.setBio(requestDTO.bio());
+        about.setParagraphOne(requestDTO.paragraphOne());
+        about.setParagraphTwo(requestDTO.paragraphTwo());
+        about.setParagraphThree(requestDTO.paragraphThree());
         about.setLocation(requestDTO.location());
         about.setGithubUrl(requestDTO.githubUrl());
         about.setLinkedinUrl(requestDTO.linkedinUrl());
@@ -29,7 +31,9 @@ public class AboutMapper {
                 about.getId(),
                 about.getName(),
                 about.getTitle(),
-                about.getBio(),
+                about.getParagraphOne(),
+                about.getParagraphTwo(),
+                about.getParagraphThree(),
                 about.getLocation(),
                 about.getGithubUrl(),
                 about.getLinkedinUrl(),
@@ -46,8 +50,14 @@ public class AboutMapper {
         if(requestDTO.title() != null) {
             about.setTitle(requestDTO.title());
         }
-        if(requestDTO.bio() != null) {
-            about.setBio(requestDTO.bio());
+        if(requestDTO.paragraphOne() != null) {
+            about.setParagraphOne(requestDTO.paragraphOne());
+        }
+        if(requestDTO.paragraphTwo() != null) {
+            about.setParagraphTwo(requestDTO.paragraphTwo());
+        }
+        if(requestDTO.paragraphThree() != null) {
+            about.setParagraphThree(requestDTO.paragraphThree());
         }
         if(requestDTO.location() != null) {
             about.setLocation(requestDTO.location());

@@ -32,7 +32,7 @@ public class AboutController {
 
     }
 
-    @PatchMapping
+    @PatchMapping("/{id}")
     public ResponseEntity<AboutResponseDTO> update(@PathVariable Long id, @Valid @RequestBody AboutUpdateRequestDTO requestDTO) {
         AboutResponseDTO updated = aboutService.update(requestDTO, id);
 

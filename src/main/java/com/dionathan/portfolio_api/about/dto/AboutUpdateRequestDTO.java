@@ -6,7 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 public record AboutUpdateRequestDTO(
         String name,
         String title,
-        String bio,
+        String paragraphOne,
+        String paragraphTwo,
+        String paragraphThree,
         String location,
         String githubUrl,
         String linkedinUrl,

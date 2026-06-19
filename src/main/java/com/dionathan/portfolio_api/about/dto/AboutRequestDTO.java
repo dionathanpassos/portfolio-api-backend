@@ -11,8 +11,11 @@ public record AboutRequestDTO(
         @NotBlank(message = "Título é obrigatório")
         String title,
 
-        @NotBlank(message = "Bio é obrigatório")
-        String bio,
+        @NotBlank(message = "o paráfrago é obrigatório")
+        String paragraphOne,
+
+        String paragraphTwo,
+        String paragraphThree,
 
         String location,
 

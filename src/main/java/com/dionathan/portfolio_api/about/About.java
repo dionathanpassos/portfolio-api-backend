@@ -25,8 +25,14 @@ public class About {
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String bio;
+    @Column(name = "paragraph_one", columnDefinition = "TEXT", nullable = false)
+    private String paragraphOne;
+
+    @Column(name = "paragraph_two", columnDefinition = "TEXT")
+    private String paragraphTwo;
+
+    @Column(name = "paragraph_three", columnDefinition = "TEXT")
+    private String paragraphThree;
 
     private String location;
 

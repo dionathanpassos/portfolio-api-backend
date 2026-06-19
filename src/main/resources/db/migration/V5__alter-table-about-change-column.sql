@@ -1,4 +1,4 @@
 ALTER TABLE tb_about
-CHANGE bio paragraphOne TEXT NOT NULL,
-ADD COLUMN paragraphTwo TEXT,
-ADD COLUMN paragraphThree TEXT;
+CHANGE paragraphOne paragraph_one TEXT NOT NULL,
+CHANGE paragraphTwo paragraph_two TEXT,
+CHANGE paragraphThree paragraph_three TEXT;
