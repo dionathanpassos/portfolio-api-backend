@@ -2,6 +2,8 @@ package com.dionathan.portfolio_api.config;
 
 
 import com.dionathan.portfolio_api.exception.CustomAuthenticationEntryPoint;
+import com.dionathan.portfolio_api.security.JwtFilter;
+import com.dionathan.portfolio_api.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,6 +23,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -35,11 +39,13 @@ public class SecurityConfig {
                                 "/api/v1/auth/forgot-password"
                         ).permitAll()
                         .requestMatchers("/v3/api-docs","/v3/api-docs/**", "/swagger-ui.html/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/v1/about/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(customAuthenticationEntryPoint)
-                );
+                )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
