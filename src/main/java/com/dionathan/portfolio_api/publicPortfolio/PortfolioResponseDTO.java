@@ -1,4 +1,16 @@
 package com.dionathan.portfolio_api.publicPortfolio;
 
-public record PortfolioResponseDTO() {
+import com.dionathan.portfolio_api.about.dto.AboutResponseDTO;
+import com.dionathan.portfolio_api.project.dto.ProjectResponseDTO;
+import com.dionathan.portfolio_api.skills.dto.SkillResponseDTO;
+import com.dionathan.portfolio_api.timeline.dto.TimelineResponseDTO;
+
+import java.util.List;
+
+public record PortfolioResponseDTO(
+        AboutResponseDTO about,
+        List<SkillResponseDTO> skills,
+        List<ProjectResponseDTO> projects,
+        List<TimelineResponseDTO> timelines
+) {
 }

@@ -14,6 +14,9 @@ public record RegisterRequestDTO(
         @Email(message = "Email inválido")
         String email,
 
+        @NotBlank(message = "Username obrigatório")
+        String username,
+
         @NotBlank(message = "Senha obrigatória")
         @Size(min = 6, message = "A senha deve conter no mínimo 6 caracteres")
         @Pattern(regexp = ".*[A-Za-z].*")

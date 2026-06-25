@@ -12,6 +12,7 @@ public class UserMapper {
 
         user.setName(requestDTO.name());
         user.setEmail(requestDTO.email());
+        user.setUsername(requestDTO.username());
         user.setPassword(encodedPassword);
         user.setRole(role);
 
@@ -22,6 +23,7 @@ public class UserMapper {
         return new UserResponseDTO(
                 user.getId(),
                 user.getName(),
+                user.getUsername(),
                 user.getEmail(),
                 user.getRole()
         );

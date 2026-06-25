@@ -7,7 +7,9 @@ import com.dionathan.portfolio_api.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +30,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
@@ -38,10 +41,15 @@ public class SecurityConfig {
                                 "/api/v1/auth/resend-verification",
                                 "/api/v1/auth/forgot-password"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/public/users/{username}/portfolio").permitAll()
                         .requestMatchers("/v3/api-docs","/v3/api-docs/**", "/swagger-ui.html/**", "/swagger-ui/**").permitAll()
-                        .requestMatchers("/api/v1/about/**").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/v1/about/**").hasRole("USER")
+                        .requestMatchers("/api/v1/skills/**").hasRole("USER")
+                        .requestMatchers("/api/v1/timeline/**").hasRole("USER")
+                        .requestMatchers("/api/v1/projects/**").hasRole("USER")
+                        .anyRequest().authenticated()
                 )
+
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(customAuthenticationEntryPoint)
                 )
