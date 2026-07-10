@@ -17,4 +17,6 @@ public interface SkillRepository extends JpaRepository<Skill, Long> {
     Page<Skill> findAllByUserAndDeletedIsFalse(Pageable pageable, User user);
 
     List<Skill> findByUser(User user);
+
+    List<Skill> findByUserAndDeletedIsFalse(User user);
 }
