@@ -14,6 +14,7 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -26,6 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService customUserDetailsService;
+    private final AuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -48,10 +50,24 @@ public class JwtFilter extends OncePerRequestFilter {
 
             }
             catch (ExpiredJwtException e) {
-                throw new CredentialsExpiredException("Token expirado", e);
+                SecurityContextHolder.clearContext();
+
+                authenticationEntryPoint.commence(
+                        request,
+                        response,
+                        new CredentialsExpiredException("Sessão expirada, efetue login novamente", e)
+                );
+                return;
             }
             catch (JwtException e) {
-                throw new BadCredentialsException("JWT inválido", e);
+                SecurityContextHolder.clearContext();
+
+                authenticationEntryPoint.commence(
+                        request,
+                        response,
+                        new BadCredentialsException("Sessão inválida, efetue login novamente", e)
+                );
+                return;
             }
         }
 
