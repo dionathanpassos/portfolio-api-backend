@@ -19,8 +19,8 @@ public class About {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+//    @Column(nullable = false)
+//    private String name;
 
     @Column(nullable = false)
     private String title;
@@ -34,16 +34,16 @@ public class About {
     @Column(name = "paragraph_three", columnDefinition = "TEXT")
     private String paragraphThree;
 
-    private String location;
-
-    @Column(name = "github_url", nullable = false)
-    private String githubUrl;
-
-    @Column(name = "linkedin_url", nullable = false)
-    private String linkedinUrl;
-
-    @Column(nullable = false)
-    private String email;
+//    private String location;
+//
+//    @Column(name = "github_url", nullable = false)
+//    private String githubUrl;
+//
+//    @Column(name = "linkedin_url", nullable = false)
+//    private String linkedinUrl;
+//
+//    @Column(nullable = false)
+//    private String email;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
