@@ -48,6 +48,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/skills/**").hasRole("USER")
                         .requestMatchers("/api/v1/timeline/**").hasRole("USER")
                         .requestMatchers("/api/v1/projects/**").hasRole("USER")
+                        .requestMatchers("/api/v1/social/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
 
