@@ -15,6 +15,9 @@ import com.dionathan.portfolio_api.project.ProjectRepository;
 import com.dionathan.portfolio_api.skills.Skill;
 import com.dionathan.portfolio_api.skills.SkillMapper;
 import com.dionathan.portfolio_api.skills.SkillRepository;
+import com.dionathan.portfolio_api.social.Social;
+import com.dionathan.portfolio_api.social.SocialMapper;
+import com.dionathan.portfolio_api.social.SocialRepository;
 import com.dionathan.portfolio_api.timeline.Timeline;
 import com.dionathan.portfolio_api.timeline.TimelineMapper;
 import com.dionathan.portfolio_api.timeline.TimelineRepository;
@@ -40,6 +43,8 @@ public class PublicPortfolioService {
     private final TimelineMapper timelineMapper;
     private final HeroRepository heroRepository;
     private final HeroMapper heroMapper;
+    private final SocialRepository socialRepository;
+    private final SocialMapper socialMapper;
 
     private final UserRepository userRepository;
 
@@ -47,12 +52,16 @@ public class PublicPortfolioService {
 
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
+        System.out.println(username);
 
         About about = aboutRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("About nao encontrado"));
 
         Hero hero = heroRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag não encontrada"));
+
+        Social social = socialRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("Social não encontrado"));
 
         List<Skill> skills = skillRepository.findByUserAndDeletedIsFalse(user);
         List<Project> projects = projectRepository.findAllByUserAndFeaturedIsTrueAndDeletedIsFalse(user);
@@ -61,6 +70,7 @@ public class PublicPortfolioService {
         return new PortfolioResponseDTO(
                 heroMapper.fromEntity(hero),
                 aboutMapper.fromEntity(about),
+                socialMapper.fromEntity(social),
                 skills.stream().map(skillMapper::fromEntity).toList(),
                 projects.stream().map(projectMapper::fromEntity).toList(),
                 timelines.stream().map(timelineMapper::fromEntity).toList()

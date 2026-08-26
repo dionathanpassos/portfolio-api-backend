@@ -10,5 +10,10 @@ public enum CategorySkills {
     FRONTEND,
     DEVOPS,
     DATABASE,
-    TOOLS
+    TOOLS,
+    SERCURITY,
+    FRAMEWORK,
+    ORM,
+    VERSIONAMENTO,
+    LINGUAGEM
 }
