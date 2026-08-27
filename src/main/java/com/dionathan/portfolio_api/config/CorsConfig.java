@@ -18,6 +18,8 @@ public class CorsConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
+                "http://dionathanpassos.com.br",
+                "http://www.dionathanpassos.com.br",
                 "https://dionathanpassos.com.br",
                 "https://www.dionathanpassos.com.br"
         ));
