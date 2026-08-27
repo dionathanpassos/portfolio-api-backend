@@ -30,6 +30,12 @@ public record ProjectResponseDTO(
         String description,
 
         @Schema(
+                description = "Breve descrição do dos desafios encontrados",
+                example = "Gerenciamento de usuarios"
+        )
+        String challenges,
+
+        @Schema(
                 description = "Texto amigável gerado automaticamente a partir do título para compor a URL do portfólio",
                 example = "e-commerce-com-spring-boot-e-java"
         )

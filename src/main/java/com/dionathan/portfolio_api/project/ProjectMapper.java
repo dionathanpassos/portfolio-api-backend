@@ -36,6 +36,7 @@ public class ProjectMapper {
                 project.getId(),
                 project.getTitle(),
                 project.getDescription(),
+                project.getChallenges(),
                 project.getSlug(),
                 project.getRepositoryUrl(),
                 project.getDemoUrl(),
@@ -65,6 +66,9 @@ public class ProjectMapper {
         }
         if(requestDTO.description() != null) {
             project.setDescription(requestDTO.description());
+        }
+        if(requestDTO.challenges() != null) {
+            project.setChallenges(requestDTO.challenges());
         }
         if(requestDTO.slug() != null) {
             project.setSlug(requestDTO.slug());

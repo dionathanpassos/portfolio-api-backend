@@ -1,0 +1,2 @@
+ALTER TABLE tb_project
+ADD COLUMN challenges VARCHAR(3000);

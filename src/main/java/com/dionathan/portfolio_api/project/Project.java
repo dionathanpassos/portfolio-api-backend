@@ -32,6 +32,9 @@ public class Project {
     @Column(nullable = false, length = 3000)
     private String description;
 
+    @Column(length = 3000)
+    private String challenges;
+
     @Column(nullable = false, unique = true)
     private String slug;
 
