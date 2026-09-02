@@ -12,6 +12,7 @@ import com.dionathan.portfolio_api.hero.HeroRepository;
 import com.dionathan.portfolio_api.project.Project;
 import com.dionathan.portfolio_api.project.ProjectMapper;
 import com.dionathan.portfolio_api.project.ProjectRepository;
+import com.dionathan.portfolio_api.project.dto.ProjectResponseDTO;
 import com.dionathan.portfolio_api.skills.Skill;
 import com.dionathan.portfolio_api.skills.SkillMapper;
 import com.dionathan.portfolio_api.skills.SkillRepository;
@@ -52,7 +53,6 @@ public class PublicPortfolioService {
 
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
-        System.out.println(username);
 
         About about = aboutRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("About nao encontrado"));
@@ -77,5 +77,15 @@ public class PublicPortfolioService {
 
         );
 
+    }
+
+    public ProjectResponseDTO getProject(String username, String slug) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User não encontrado"));
+
+        Project project = projectRepository.findByUserAndSlug(user, slug)
+                .orElseThrow(() -> new ResourceNotFoundException("Projeto não encontrado"));
+
+        return projectMapper.fromEntity(project);
     }
 }

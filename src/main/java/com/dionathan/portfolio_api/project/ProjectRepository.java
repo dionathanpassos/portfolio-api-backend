@@ -16,4 +16,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findAllByUserAndFeaturedIsTrueAndDeletedIsFalse(User user);
 
     boolean existsBySlugAndUser(String slug, User user);
+
+    Optional<Project> findByUserAndSlug(User user, String slug);
 }

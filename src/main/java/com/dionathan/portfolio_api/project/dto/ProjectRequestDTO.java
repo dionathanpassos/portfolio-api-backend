@@ -14,14 +14,14 @@ public record ProjectRequestDTO(
                 description = "Nome do projeto",
                 example = "Autenticação com JWT"
         )
-        @NotBlank(message = "Título obrigatório")
+        @NotBlank(message = "Título é obrigatório")
         String title,
 
         @Schema(
                 description = "Breve descrição do projeto",
                 example = "API para cadastro e login de usuários"
         )
-        @NotBlank(message = "Título obrigatório")
+        @NotBlank(message = "Descrição é obrigatório")
         String description,
 
         @Schema(
@@ -34,14 +34,14 @@ public record ProjectRequestDTO(
                 description = "Texto amigável gerado automaticamente a partir do título para compor a URL do portfólio",
                 example = "e-commerce-com-spring-boot-e-java"
         )
-        @NotBlank(message = "Título obrigatório")
+        @NotBlank(message = "Slug é obrigatório")
         String slug,
 
         @Schema(
                 description = "URL do repositório GitHub",
                 example = "https://github.com/meu-projeto"
         )
-        @NotBlank(message = "Título obrigatório")
+        @NotBlank(message = "Repositório é obrigatório")
         String repositoryUrl,
 
         @Schema(

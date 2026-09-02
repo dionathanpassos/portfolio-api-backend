@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,12 +56,20 @@ public class AuthService {
 
     public TokenDTO login(LoginRequestDTO requestDTO) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        requestDTO.email(),
-                        requestDTO.password()
-                )
-        );
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            requestDTO.email(),
+                            requestDTO.password()
+                    )
+            );
+        } catch (BadCredentialsException ex) {
+            throw new BadCredentialsException(
+                    "E-mail ou senha inválidos."
+            );
+        }
+
         User user = (User) authentication.getPrincipal();
 
         if (!user.isEmailVerified()) {
